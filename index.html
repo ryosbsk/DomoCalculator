@@ -42,24 +42,24 @@
       <br>
       <label for="">職業差補正</label><input type="text" name="name" value="" id="jobGap">
       <br>
-      <input type="button" name="name" value="計算" onclick="calculate">
+      <input type="button" name="name" value="計算" onclick="calculate()">
     </form>
     与えるダメージ: <span id="damage">0</span>
     <script type="text/javascript">
       function calculate(){
 
         // 変数の取得
-        var attack = document.getElementById('attack');
-        var deffence = document.getElementById('deffence');
-        var power = document.getElementById('power');
-        var constant = document.getElementById('constant');
-        var increase = document.getElementById('increase');
-        var element = document.getElementById('element');
-        var amplification = document.getElementById('amplification');
-        var jobIncrease = document.getElementById('jobIncrease');
-        var enemyLevelGap = document.getElementById('enemyLevelGap');
-        var skillLevelGap = document.getElementById('skillLevelGap');
-        var jobGap = document.getElementById('jobGap');
+        var attack = document.getElementById('attack').value;
+        var deffence = document.getElementById('deffence').value;
+        var power = document.getElementById('power').value;
+        var constant = document.getElementById('constant').value;
+        var increase = document.getElementById('increase').value;
+        var element = document.getElementById('element').value;
+        var amplification = document.getElementById('amplification').value;
+        var jobIncrease = document.getElementById('jobIncrease').value;
+        var enemyLevelGap = document.getElementById('enemyLevelGap').value;
+        var skillLevelGap = document.getElementById('skillLevelGap').value;
+        var jobGap = document.getElementById('jobGap').value;
 
         // 補正
         element = element + (1/2);
@@ -76,11 +76,7 @@
 　　　　　　　×職業増加率×敵レベル差補正×習得レベル差補正×職業差補正×決闘補正
         */
         document.getElementById('damage').value = 1;
-
-        damage.innerHTML = (((attack / deffence)*(power / constant)*increase*element) + ((attack - deffence)* amplification * increase * element))*jobIncrease*skillLevelGap*jobGap
-
-
-
+      damage.innerHTML = (((attack / deffence)*(power / constant)*increase*element) + ((attack - deffence)* amplification * increase * element))*jobIncrease*skillLevelGap*jobGap
       }
     </script>
   </body>
