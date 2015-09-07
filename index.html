@@ -26,11 +26,11 @@
       <br>
       <label for="">天賦の威力</label><input type="text" name="name" value="" id="power">
       <br>
-      <label for="">定数</label><input type="text" name="name" value="" id="const">
+      <label for="">定数</label><input type="text" name="name" value="" id="constant">
       <br>
       <label for="">増加率</label><input type="text" name="name" value="" id="increase">
       <br>
-      <label for="">属性</label><input type="text" name="name" value="" id="element">
+      <label for="">弱点属性値</label><input type="text" name="name" value="" id="element">
       <br>
       <label for="">天賦の増幅率</label><input type="text" name="name" value="" id="amplification">
       <br>
@@ -42,10 +42,42 @@
       <br>
       <label for="">職業差補正</label><input type="text" name="name" value="" id="jobGap">
       <br>
-      <input type="button" name="name" value="計算" onclick="calculate">
+      <input type="button" name="name" value="計算" onclick="calculate()">
     </form>
+    与えるダメージ: <span id="damage">0</span>
     <script type="text/javascript">
-      function calculate(){}
+      function calculate(){
+
+        // 変数の取得
+        var attack = document.getElementById('attack').value;
+        var deffence = document.getElementById('deffence').value;
+        var power = document.getElementById('power').value;
+        var constant = document.getElementById('constant').value;
+        var increase = document.getElementById('increase').value;
+        var element = document.getElementById('element').value;
+        var amplification = document.getElementById('amplification').value;
+        var jobIncrease = document.getElementById('jobIncrease').value;
+        var enemyLevelGap = document.getElementById('enemyLevelGap').value;
+        var skillLevelGap = document.getElementById('skillLevelGap').value;
+        var jobGap = document.getElementById('jobGap').value;
+
+        // 補正
+        element = element + (1/2);
+        if(element>100) element = 100;
+        element = element / 100;
+        amplification = amplification / 100;
+        jobIncrease = jobIncrease / 100;
+        enemyLevelGap = 1 + enemyLevelGap / 100;
+        jobGap = 1 - jobGap / 100;
+
+        // 計算
+        /*最終ダメージ＝{[(攻撃÷防御)×(威力÷定数)×増加率(A)×属性(A)]
+　　　　　　　＋[(物攻－物防)×増幅率×増加率(B)×属性(B)]}
+　　　　　　　×職業増加率×敵レベル差補正×習得レベル差補正×職業差補正×決闘補正
+        */
+        document.getElementById('damage').value = 1;
+      damage.innerHTML = (((attack / deffence)*(power / constant)*increase*element) + ((attack - deffence)* amplification * increase * element))*jobIncrease*skillLevelGap*jobGap
+      }
     </script>
   </body>
 </html>
