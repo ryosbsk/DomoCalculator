@@ -131,7 +131,7 @@
         if (basicDamage > constant) basicDamage = constant;
 
         var correctionA = power / constant * increase * element;
-        var correctionB = amplification + increase * element;
+        var correctionB = amplification * increase * element;
         var correctionC = jobIncrease * enemyLevelGap * skillLevelGap * jobGap;
 
         var damage;
