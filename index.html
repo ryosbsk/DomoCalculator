@@ -42,10 +42,53 @@
       <br>
       <label for="">職業差補正</label><input type="text" id="jobGap">
       <br>
+<<<<<<< HEAD
       <input type="button" value="計算" onclick="calculate">
+=======
+      <input type="button" name="name" value="計算" onclick="calculate">
+>>>>>>> parent of 0194b84... 動いた。
     </form>
     <script type="text/javascript">
+<<<<<<< HEAD
       function calculate(){}
+=======
+      function calculate(){
+
+        // 変数の取得
+        var attack = document.getElementById('attack');
+        var deffence = document.getElementById('deffence');
+        var power = document.getElementById('power');
+        var constant = document.getElementById('constant');
+        var increase = document.getElementById('increase');
+        var element = document.getElementById('element');
+        var amplification = document.getElementById('amplification');
+        var jobIncrease = document.getElementById('jobIncrease');
+        var enemyLevelGap = document.getElementById('enemyLevelGap');
+        var skillLevelGap = document.getElementById('skillLevelGap');
+        var jobGap = document.getElementById('jobGap');
+
+        // 補正
+        element = element + (1/2);
+        if(element>100) element = 100;
+        element = element / 100;
+        amplification = amplification / 100;
+        jobIncrease = jobIncrease / 100;
+        enemyLevelGap = 1 + enemyLevelGap / 100;
+        jobGap = 1 - jobGap / 100;
+
+        // 計算
+        /*最終ダメージ＝{[(攻撃÷防御)×(威力÷定数)×増加率(A)×属性(A)]
+　　　　　　　＋[(物攻－物防)×増幅率×増加率(B)×属性(B)]}
+　　　　　　　×職業増加率×敵レベル差補正×習得レベル差補正×職業差補正×決闘補正
+        */
+        document.getElementById('damage').value = 1;
+
+        damage.innerHTML = (((attack / deffence)*(power / constant)*increase*element) + ((attack - deffence)* amplification * increase * element))*jobIncrease*skillLevelGap*jobGap
+
+
+
+      }
+>>>>>>> parent of 0194b84... 動いた。
     </script>
   </body>
 </html>
