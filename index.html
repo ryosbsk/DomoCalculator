@@ -2,70 +2,112 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <style>
-      form{
-        line-height: 100%;
-      }
-      label{
-        width: 150px;
-        text-align: right;
-        padding-right: 10px;
-      }
-      input{
-        width: 50px;
-      }
-    </style>
     <title>飛天オンライン計算機</title>
   </head>
+  <style media="all">
+    * {
+      font-family: メイリオ;
+    }
+    label, select, input{
+      display: block;
+    }
+  </style>
   <body>
-    <h1>飛天オンラインダメージ計算機 ver.0.0.1</h1>
-    <form class="" action="index.html" method="post">
-      <label for="">自分の攻撃力</label><input type="text" id="attack">
-      <br>
-      <label for="">敵の防御力</label><input type="text" id="deffence">
-      <br>
-      <label for="">天賦の威力</label><input type="text" id="power">
-      <br>
-      <label for="">定数</label><input type="text" id="const">
-      <br>
-      <label for="">増加率</label><input type="text" id="increase">
-      <br>
-      <label for="">属性</label><input type="text" id="element">
-      <br>
-      <label for="">天賦の増幅率</label><input type="text" id="amplification">
-      <br>
-      <label for="">職業増加率</label><input type="text" id="jobIncrease">
-      <br>
-      <label for="">敵レベル差補正</label><input type="text" id="enemyLevelGap">
-      <br>
-      <label for="">習得レベル差補正</label><input type="text" id="skillLevelGap">
-      <br>
-      <label for="">職業差補正</label><input type="text" id="jobGap">
-      <br>
-<<<<<<< HEAD
-      <input type="button" value="計算" onclick="calculate">
-=======
-      <input type="button" name="name" value="計算" onclick="calculate">
->>>>>>> parent of 0194b84... 動いた。
+    <h1>飛天オンラインダメージ計算機 ver.0.2</h1>
+    <form>
+      <label for="attack">自分の攻撃力</label><input type="text" id="attack">
+      <label for="deffence">敵の防御力</label><input type="text" id="deffence">
+      <label for="power">天賦の威力</label><input type="text" id="power">
+      <label for="constant">定数</label>
+      <select id="constant" disabled>
+        <option value="6.25">6.25</option>
+        <option value="7.5" selected>7.5</option>
+      </select>
+      <label for="increase">増加率(%)</label><input type="text" id="increase">
+      <label for="element">属性値</label><input type="text" id="element">
+      <label for="amplification">天賦の増幅率(%)</label><input type="text" id="amplification">
+      <label for="jobIncrease">職業増加率(%)</label><input type="text" id="jobIncrease">
+      <label for="enemyLevelGap">敵レベル差補正</label>
+      <select id="enemyLevelGap">
+          <option value="0.6">+60%</option>
+          <option value="0.45">+45%</option>
+          <option value="0.3">+30%</option>
+          <option value="0.15">+15%</option>
+          <option value="0" selected>0%</option>
+          <option value="-0.15">-15%</option>
+          <option value="-0.3">-30%</option>
+          <option value="-0.45">-45%</option>
+          <option value="-0.6">-60%</option>
+      </select>
+      <label for="skillLevelGap">習得レベル差補正</label>
+      <select id="skillLevelGap">
+        <option value="0">0%</option>
+        <option value="-0.05">-5%</option>
+        <option value="-0.1">-10%</option>
+        <option value="-0.15">-15%</option>
+        <option value="-0.2">-20%</option>
+        <option value="-0.25">-25%</option>
+        <option value="-0.3">-30%</option>
+        <option value="-0.35">-35%</option>
+        <option value="-0.4">-40%</option>
+        <option value="-0.45">-45%</option>
+        <option value="-0.5">-50%</option>
+      </select>
+      <label for="jobGap">職業差補正</label>
+      <select id="jobGap">
+        <option value="0">0%</option>
+        <option value="-0.1">-10%</option>
+        <option value="-0.2">-20%</option>
+      </select>
+      <input type="button" value="計算" onclick="calculate()">
     </form>
+    与えるダメージ: <span id="damage">------</span>
+    <hr>
+    <h2>これは何？</h2>
+    <p>
+      MMORPG飛天オンラインのダメージ計算機です。
+    </p>
+    <h2>使い方</h2>
+    <ol>
+      <li>各フォームに数値を入力してください。</li>
+      <li>計算ボタンをクリックしてください。</li>
+    </ol>
+    <h2>計算式について</h2>
+    <p>
+      以下は，<a href="http://domo-jp.e-whs.net/dmg.html">飛天オンライン・データベース</a>からの引用です。
+    </p>
+    <blockquote cite="http://domo-jp.e-whs.net/dmg.html">
+      最終ダメージ＝(攻撃÷防御×補正(A)＋(物攻－物防)×補正(B))×補正(C)<br> 補正(A)＝威力÷定数×増加率(%)×属性(%)<br> 補正(B)＝増幅率(%)×増加率(%)×属性(%)<br> 補正(C)＝職業増加率(%)×敵レベル差補正(%)×習得レベル差補正(%)×職業差補正(%)×決闘補正(%)
+    </blockquote>
+    <p>
+      各用語の説明は同サイトを参考してください。
+    </p>
+    <h2>未実装</h2>
+    <ul>
+      <li>法術攻撃</li>
+      <ul>
+        <li>法術剣・使蟲など，物理攻撃力と法術攻撃力とを参照する天賦も正しい計算ができません。</li>
+      </ul>
+      <li>抵抗属性</li>
+    </ul>
+    <h2>製作者</h2>
+    <p>
+      <a href="https://twitter.com/ryosbsk">@ryosbsk</a>
+    </p>
     <script type="text/javascript">
-<<<<<<< HEAD
-      function calculate(){}
-=======
       function calculate(){
-
         // 変数の取得
-        var attack = document.getElementById('attack');
-        var deffence = document.getElementById('deffence');
-        var power = document.getElementById('power');
-        var constant = document.getElementById('constant');
-        var increase = document.getElementById('increase');
-        var element = document.getElementById('element');
-        var amplification = document.getElementById('amplification');
-        var jobIncrease = document.getElementById('jobIncrease');
-        var enemyLevelGap = document.getElementById('enemyLevelGap');
-        var skillLevelGap = document.getElementById('skillLevelGap');
-        var jobGap = document.getElementById('jobGap');
+        var attack = document.getElementById('attack').value - 0;
+        var deffence = document.getElementById('deffence').value - 0;
+        var power = document.getElementById('power').value - 0;
+        var constant = document.getElementById('constant').value - 0;
+        var increase = document.getElementById('increase').value - 0;
+        var element = document.getElementById('element').value - 0;
+        var amplification = document.getElementById('amplification').value - 0;
+        var jobIncrease = document.getElementById('jobIncrease').value - 0;
+        var enemyLevelGap = document.getElementById('enemyLevelGap').value - 0;
+        var skillLevelGap = document.getElementById('skillLevelGap').value - 0;
+        var jobGap = document.getElementById('jobGap').value - 0;
 
         // 補正
         element = element + (1/2);
@@ -73,22 +115,30 @@
         element = element / 100;
         amplification = amplification / 100;
         jobIncrease = jobIncrease / 100;
-        enemyLevelGap = 1 + enemyLevelGap / 100;
-        jobGap = 1 - jobGap / 100;
+        enemyLevelGap = 1 + enemyLevelGap;
+        skillLevelGap = 1 + skillLevelGap;
+        jobGap = 1 + jobGap;
 
         // 計算
-        /*最終ダメージ＝{[(攻撃÷防御)×(威力÷定数)×増加率(A)×属性(A)]
-　　　　　　　＋[(物攻－物防)×増幅率×増加率(B)×属性(B)]}
-　　　　　　　×職業増加率×敵レベル差補正×習得レベル差補正×職業差補正×決闘補正
+        /*
+        最終ダメージ＝(攻撃÷防御×補正(A)＋(物攻－物防)×補正(B))×補正(C)
+          補正(A)＝威力÷定数×増加率(%)×属性(%)
+          補正(B)＝増幅率(%)×増加率(%)×属性(%)
+          補正(C)＝職業増加率(%)×敵レベル差補正(%)×習得レベル差補正(%)×職業差補正(%)×決闘補正(%)
         */
-        document.getElementById('damage').value = 1;
 
-        damage.innerHTML = (((attack / deffence)*(power / constant)*increase*element) + ((attack - deffence)* amplification * increase * element))*jobIncrease*skillLevelGap*jobGap
+        var basicDamage = attack / deffence;
+        if (basicDamage > constant) basicDamage = constant;
 
+        var correctionA = power / constant * increase * element;
+        var correctionB = amplification + increase * element;
+        var correctionC = jobIncrease * enemyLevelGap * skillLevelGap * jobGap;
 
+        var damage;
+        damage = (basicDamage * correctionA + (attack - deffence) * correctionB) * correctionC;
 
+        document.getElementById("damage").innerHTML = damage;
       }
->>>>>>> parent of 0194b84... 動いた。
     </script>
   </body>
 </html>
