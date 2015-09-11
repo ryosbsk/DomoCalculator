@@ -13,7 +13,7 @@
     }
   </style>
   <body>
-    <h1>飛天オンラインダメージ計算機 ver.0.2</h1>
+    <h1>飛天オンラインダメージ計算機 ver.0.3</h1>
     <form>
       <label for="attack">自分の攻撃力</label><input type="text" id="attack">
       <label for="deffence">敵の防御力</label><input type="text" id="deffence">
@@ -81,6 +81,7 @@
     </blockquote>
     <p>
       各用語の説明は同サイトを参考してください。
+      <br>計算結果は若干おおきめに出力されますが，おおむね正確です。
     </p>
     <h2>未実装</h2>
     <ul>
@@ -109,15 +110,37 @@
         var skillLevelGap = document.getElementById('skillLevelGap').value - 0;
         var jobGap = document.getElementById('jobGap').value - 0;
 
+        console.log("attack: " + attack);
+        console.log("deffence: " + deffence);
+        console.log("power: " + power);
+        console.log("constant: " + constant);
+        console.log("increase: " + increase);
+        console.log("element: " + element);
+        console.log("amlification: " + amplification);
+        console.log("jobIncrease: " + jobIncrease);
+        console.log("enemyLevelGap: " + enemyLevelGap);
+        console.log("skillLevelGap: " + skillLevelGap);
+        console.log("jobGap: " + jobGap);
+
         // 補正
+        increase = 1 + increase / 100;
         element = element + (1/2);
         if(element>100) element = 100;
-        element = element / 100;
+        element = 1 + element / 100;
         amplification = amplification / 100;
         jobIncrease = 1 + jobIncrease / 100;
         enemyLevelGap = 1 + enemyLevelGap;
         skillLevelGap = 1 + skillLevelGap;
         jobGap = 1 + jobGap;
+
+        console.log("--補正後--");
+        console.log("increase: " + increase);
+        console.log("element: " + element);
+        console.log("amlification: " + amplification);
+        console.log("jobIncrease: " + jobIncrease);
+        console.log("enemyLevelGap: " + enemyLevelGap);
+        console.log("skillLevelGap: " + skillLevelGap);
+        console.log("jobGap: " + jobGap);
 
         // 計算
         /*
@@ -129,15 +152,23 @@
 
         var basicDamage = attack / deffence;
         if (basicDamage > constant) basicDamage = constant;
+        console.log("basicDamage: " + basicDamage);
 
         var correctionA = power / constant * increase * element;
         var correctionB = amplification * increase * element;
         var correctionC = jobIncrease * enemyLevelGap * skillLevelGap * jobGap;
 
+        console.log("correctionA: " + correctionA);
+        console.log("correctionB: " + correctionB);
+        console.log("correctionC: "+ correctionC);
+
         var damage;
         damage = (basicDamage * correctionA + (attack - deffence) * correctionB) * correctionC;
+        damage = Math.floor(damage);
 
         document.getElementById("damage").innerHTML = damage;
+
+        console.log("---");
       }
     </script>
   </body>
