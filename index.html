@@ -2,64 +2,96 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>飛天オンライン計算機</title>
+    <title>飛天オンラインダメージ計算機</title>
   </head>
   <style media="all">
     * {
       font-family: メイリオ;
     }
-    label, select, input{
+    fieldset{
+      width: 200px;
+    }
+    label,input{
       display: block;
     }
   </style>
   <body>
-    <h1>飛天オンラインダメージ計算機 ver.0.3</h1>
+    <h1>飛天オンラインダメージ計算機 ver.0.4</h1>
     <form>
-      <label for="attack">自分の攻撃力</label><input type="text" id="attack">
-      <label for="deffence">敵の防御力</label><input type="text" id="deffence">
-      <label for="power">天賦の威力</label><input type="text" id="power">
-      <label for="constant">定数</label>
-      <select id="constant" disabled>
-        <option value="6.25">6.25</option>
-        <option value="7.5" selected>7.5</option>
-      </select>
-      <label for="increase">増加率(%)</label><input type="text" id="increase">
-      <label for="element">属性値</label><input type="text" id="element">
-      <label for="amplification">天賦の増幅率(%)</label><input type="text" id="amplification">
-      <label for="jobIncrease">職業増加率(%)</label><input type="text" id="jobIncrease">
-      <label for="enemyLevelGap">敵レベル差補正</label>
-      <select id="enemyLevelGap">
-          <option value="0.6">+60%</option>
-          <option value="0.45">+45%</option>
-          <option value="0.3">+30%</option>
-          <option value="0.15">+15%</option>
-          <option value="0" selected>0%</option>
+      <fieldset>
+        <legend>キャラステータス</legend>
+          <label for="attack">物理攻撃力</label><input type="number" id="attack">
+          <label for="mAttack">法術攻撃力</label><input type="number" id="mAttack">
+          <label for="increase">物理ダメージ増加率(%)</label><input type="number" id="increase">
+          <label for="mIncrease">法術ダメージ増加率(%)</label><input type="number" id="mIncrease">
+          <label for="element">属性値</label><input type="number" id="element">
+          <label for="elementType">属性タイプ</label>
+          <select id="elementType">
+            <option value="isWeekness">弱点</option>
+            <option value="isResistance">抵抗</option>
+            <option value="isNormal">どちらでもない</option>
+          </select>
+          <label for="jobIncrease">職業増加率(%)</label><input type="number" id="jobIncrease">
+      </fieldset>
+      <fieldset>
+        <legend>妖魔ステータス</legend>
+        <label for="deffence">物理防御力</label><input type="number" id="deffence">
+        <label for="mDeffence">法術防御力</label><input type="number" id="mDeffence">
+      </fieldset>
+      <fieldset>
+        <legend>天賦</legend>
+        <label for="power">威力</label><input type="number" id="power">
+        <label for="amplification">増幅率(%)</label><input type="number" id="amplification" step="10">
+        <label for="powerType">分類</label>
+        <select id="powerType">
+          <option value="isPhysics">物理</option>
+          <option value="isMasic">法術</option>
+        </select>
+        <label for="mElement">法術属性値</label><input type="nuber" value="50" disabled>
+        <label for="mElementType">法術属性タイプ</label>
+        <select id="mElementType" disabled>
+          <option value="isWeekness">弱点</option>
+          <option value="isResistance">抵抗</option>
+          <option value="isNomal">どちらでもない</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <label for="enemyLevelGap">敵レベル差補正</label>
+        <legend>補正</legend>
+        <select id="enemyLevelGap">
+            <option value="0.6">+60%</option>
+            <option value="0.45">+45%</option>
+            <option value="0.3">+30%</option>
+            <option value="0.15">+15%</option>
+            <option value="0" selected>0%</option>
+            <option value="-0.15">-15%</option>
+            <option value="-0.3">-30%</option>
+            <option value="-0.45">-45%</option>
+            <option value="-0.6">-60%</option>
+        </select>
+        <label for="skillLevelGap">天賦習得レベル差補正</label>
+        <select id="skillLevelGap">
+          <option value="0">0%</option>
+          <option value="-0.05">-5%</option>
+          <option value="-0.1">-10%</option>
           <option value="-0.15">-15%</option>
+          <option value="-0.2">-20%</option>
+          <option value="-0.25">-25%</option>
           <option value="-0.3">-30%</option>
+          <option value="-0.35">-35%</option>
+          <option value="-0.4">-40%</option>
           <option value="-0.45">-45%</option>
-          <option value="-0.6">-60%</option>
-      </select>
-      <label for="skillLevelGap">習得レベル差補正</label>
-      <select id="skillLevelGap">
-        <option value="0">0%</option>
-        <option value="-0.05">-5%</option>
-        <option value="-0.1">-10%</option>
-        <option value="-0.15">-15%</option>
-        <option value="-0.2">-20%</option>
-        <option value="-0.25">-25%</option>
-        <option value="-0.3">-30%</option>
-        <option value="-0.35">-35%</option>
-        <option value="-0.4">-40%</option>
-        <option value="-0.45">-45%</option>
-        <option value="-0.5">-50%</option>
-      </select>
-      <label for="jobGap">職業差補正</label>
-      <select id="jobGap">
-        <option value="0">0%</option>
-        <option value="-0.1">-10%</option>
-        <option value="-0.2">-20%</option>
-      </select>
-      <input type="button" value="計算" onclick="calculate()">
+          <option value="-0.5">-50%</option>
+        </select>
+        <label for="jobGap">職業差補正</label>
+        <select id="jobGap">
+          <option value="0">0%</option>
+          <option value="-0.1">-10%</option>
+          <option value="-0.2">-20%</option>
+        </select>
+      </fieldset>
+      </fieldset>
+      <input type="button" value="計算" id="calculate">
     </form>
     与えるダメージ: <span id="damage">------</span>
     <hr>
@@ -69,107 +101,128 @@
     </p>
     <h2>使い方</h2>
     <ol>
-      <li>各フォームに数値を入力してください。</li>
+      <li>各フォームに数値を入力してください(各数値は省略可能です)。</li>
       <li>計算ボタンをクリックしてください。</li>
     </ol>
     <h2>計算式について</h2>
     <p>
-      以下は，<a href="http://domo-jp.e-whs.net/dmg.html">飛天オンライン・データベース</a>からの引用です。
+      以下は，<a href="//domo-jp.e-whs.net/dmg.html">飛天オンライン・データベース</a>からの引用です。
     </p>
-    <blockquote cite="http://domo-jp.e-whs.net/dmg.html">
+    <blockquote cite="//domo-jp.e-whs.net/dmg.html">
       最終ダメージ＝(攻撃÷防御×補正(A)＋(物攻－物防)×補正(B))×補正(C)<br> 補正(A)＝威力÷定数×増加率(%)×属性(%)<br> 補正(B)＝増幅率(%)×増加率(%)×属性(%)<br> 補正(C)＝職業増加率(%)×敵レベル差補正(%)×習得レベル差補正(%)×職業差補正(%)×決闘補正(%)
     </blockquote>
     <p>
       各用語の説明は同サイトを参考してください。
-      <br>計算結果は若干おおきめに出力されますが，おおむね正確です。
     </p>
-    <h2>未実装</h2>
+    <h3>法術属性値について</h3>
+    <p>
+      法術属性値は，50固定と推定されます。編集できません。
+    </p>
+    <h2>今後の実装予定</h2>
     <ul>
-      <li>法術攻撃</li>
-      <ul>
-        <li>法術剣・使蟲など，物理攻撃力と法術攻撃力とを参照する天賦も正しい計算ができません。</li>
-      </ul>
-      <li>抵抗属性</li>
+      <li>落雷符・爆裂蟲など，複数回ヒットする天賦</li>
     </ul>
     <h2>製作者</h2>
     <p>
-      <a href="https://twitter.com/ryosbsk">@ryosbsk</a>
+      <a href="//twitter.com/ryosbsk">@ryosbsk</a>
     </p>
-    <script type="text/javascript">
-      function calculate(){
-        // 変数の取得
-        var attack = document.getElementById('attack').value - 0;
-        var deffence = document.getElementById('deffence').value - 0;
-        var power = document.getElementById('power').value - 0;
-        var constant = document.getElementById('constant').value - 0;
-        var increase = document.getElementById('increase').value - 0;
-        var element = document.getElementById('element').value - 0;
-        var amplification = document.getElementById('amplification').value - 0;
-        var jobIncrease = document.getElementById('jobIncrease').value - 0;
-        var enemyLevelGap = document.getElementById('enemyLevelGap').value - 0;
-        var skillLevelGap = document.getElementById('skillLevelGap').value - 0;
-        var jobGap = document.getElementById('jobGap').value - 0;
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+      $(function(){
+        $('#powerType').change(function(){
+          if ($(this).val() == "isMasic") {
+            $("#mElementType").prop("disabled", false);
+          }else {
+            $("#mElementType").prop("disabled", true);
+          }
+        });
 
-        console.log("attack: " + attack);
-        console.log("deffence: " + deffence);
-        console.log("power: " + power);
-        console.log("constant: " + constant);
-        console.log("increase: " + increase);
-        console.log("element: " + element);
-        console.log("amlification: " + amplification);
-        console.log("jobIncrease: " + jobIncrease);
-        console.log("enemyLevelGap: " + enemyLevelGap);
-        console.log("skillLevelGap: " + skillLevelGap);
-        console.log("jobGap: " + jobGap);
+        $("#calculate").click(function(){
+          // 変数の定義
+          // 物理
+          var attack = $('#attack').val() - 0;
+          var deffence = $('#deffence').val() - 0;
+          var increase = $('#increase').val() - 0;
+          var element = $("#element").val() - 0;
+          var elementType = $("#elementType").val(); // isWeekness, isResistance, isNormal
+          // 法術
+          var mAttack = $('#mAttack').val() - 0;
+          var mDeffence = $('#mDeffence').val() - 0;
+          var mIncrease = $('#mIncrease').val() - 0;
+          var mElement = $("#mElement").val() - 0;
+          var mElementType = $("#mElementType").val(); // isWeekness, isResistance, isNormal
+          // 天賦
+          var power = $('#power').val() - 0;
+          var amplification = $('#amplification').val() - 0;
+          // その他
+          var jobIncrease = $('#jobIncrease').val() - 0;
+          var enemyLevelGap = $('#enemyLevelGap').val() - 0;
+          var skillLevelGap = $('#skillLevelGap').val() - 0;
+          var jobGap = $('#jobGap').val() - 0;
 
-        // 補正
-        increase = 1 + increase / 100;
-        element = element + (1/2);
-        if(element>100) element = 100;
-        element = 1 + element / 100;
-        amplification = amplification / 100;
-        jobIncrease = 1 + jobIncrease / 100;
-        enemyLevelGap = 1 + enemyLevelGap;
-        skillLevelGap = 1 + skillLevelGap;
-        jobGap = 1 + jobGap;
+          // 補正計算
+          increase = 1 + increase / 100;
+          element = element + 1/2;
+          if (elementType == "isWeekness") {
+            if (element > 100) element = 100;
+            element = 1 + element / 100;
+          }else if (elementType == "isResistance") {
+            if (element < 20) element = 20;
+            element = 1 - element / 100;
+          }else {
+            element = 1;
+          }
 
-        console.log("--補正後--");
-        console.log("increase: " + increase);
-        console.log("element: " + element);
-        console.log("amlification: " + amplification);
-        console.log("jobIncrease: " + jobIncrease);
-        console.log("enemyLevelGap: " + enemyLevelGap);
-        console.log("skillLevelGap: " + skillLevelGap);
-        console.log("jobGap: " + jobGap);
+          mIncrease = 1 + mIncrease / 100;
+          mElement = mElement + 1/2;
+          if (mElementType == "isWeekness") {
+            if (mElement > 100) mElement = 100;
+            mElement = 1 + mElement / 100;
+          }else if (mElementType == "isResistance") {
+            if (mElement < 20) mElement = 20;
+            mElement = 1 - mElement / 100;
+          }else {
+            mElement = 1;
+          }
 
-        // 計算
-        /*
-        最終ダメージ＝(攻撃÷防御×補正(A)＋(物攻－物防)×補正(B))×補正(C)
-          補正(A)＝威力÷定数×増加率(%)×属性(%)
-          補正(B)＝増幅率(%)×増加率(%)×属性(%)
-          補正(C)＝職業増加率(%)×敵レベル差補正(%)×習得レベル差補正(%)×職業差補正(%)×決闘補正(%)
-        */
+          amplification = amplification / 100;
+          jobIncrease = 1 + jobIncrease / 100;
+          enemyLevelGap = 1 + enemyLevelGap;
+          skillLevelGap = 1 + skillLevelGap;
+          jobGap = 1 + jobGap;
 
-        var basicDamage = attack / deffence;
-        if (basicDamage > constant) basicDamage = constant;
-        console.log("basicDamage: " + basicDamage);
+          // 計算
+          /*
+          最終ダメージ＝(攻撃÷防御×補正(A)＋(物攻－物防)×補正(B))×補正(C)
+            補正(A)＝威力÷定数×増加率(%)×属性(%)
+            補正(B)＝増幅率(%)×増加率(%)×属性(%)
+            補正(C)＝職業増加率(%)×敵レベル差補正(%)×習得レベル差補正(%)×職業差補正(%)×決闘補正(%)
+          */
 
-        var correctionA = power / constant * increase * element;
-        var correctionB = amplification * increase * element;
-        var correctionC = jobIncrease * enemyLevelGap * skillLevelGap * jobGap;
+          if ($("#powerType").val() == "isPhysics") {
+              var constant = 7.5;
+              var basicDamage = attack / deffence;
+              var correctionA = power / constant * increase * element;
+          }else {
+            constant = 6.25;
+            basicDamage = mAttack / mDeffence;
+            correctionA = power / constant * mIncrease * mElement;
+          }
 
-        console.log("correctionA: " + correctionA);
-        console.log("correctionB: " + correctionB);
-        console.log("correctionC: "+ correctionC);
+          if (basicDamage > constant) basicDamage = constant;
 
-        var damage;
-        damage = (basicDamage * correctionA + (attack - deffence) * correctionB) * correctionC;
-        damage = Math.floor(damage);
+          var correctionB = amplification * increase * element;
+          var correctionC = jobIncrease * enemyLevelGap * skillLevelGap * jobGap;
 
-        document.getElementById("damage").innerHTML = damage;
+          var damage;
+          damage = (basicDamage * correctionA + (attack - deffence) * correctionB) * correctionC;
+          damage = Math.round(damage);
 
-        console.log("---");
-      }
+          $("#damage").text(damage);
+        });
+
+      });
     </script>
+
   </body>
 </html>
