@@ -1,18 +1,8 @@
 $(function() {
-  // テスト用
-  // ボタンを押すと、それぞれの <input> に値が入る。
-  $('#test1').click(function(){
-    // フォームの要素を取得
-    (function getFormElements(){
-      var array = $('form :input');
-      console.log(array);
-      console.log(array.length);
-    })();
 
-  });
 
   // 計算
-  $('#btn-calculate').click(function() {
+  $('#btn-calculator').click(function() {
     var PHYSICAL_CONSTANT = 7.5,
       MAGIC_CONSTANT = 6.25,
       MAGIC_ELEMENT = 50,
@@ -34,7 +24,7 @@ $(function() {
     Physical = new Status( // attack, deffence, damageUpRate, element, elementType, constant
       $('#physical-attack').val() - 0,
       $('#enemy-physical-deffence').val() - 0,
-      $('#physical-damage-increase-rate').val() - 0,
+      $('#physical-damage-increase-rate').val() - 0 + 1,
       $('#physical-element').val() - 0,
       $('#physical-element-type').val() - 0,
       PHYSICAL_CONSTANT
@@ -43,7 +33,7 @@ $(function() {
     Magic = new Status( // attack, deffence, damageUpRate, element, elementType, constant
       $('#magic-attack').val() - 0,
       $('#enemy-magic-deffence').val() - 0,
-      $('#magic-damage-increase-rate').val() - 0,
+      $('#magic-damage-increase-rate').val() - 0 + 1,
       MAGIC_ELEMENT,
       $('#magic-element-type').val() - 0,
       MAGIC_CONSTANT
@@ -63,7 +53,7 @@ $(function() {
       }
     }
 
-    power = calculator.getThePower(matrix, POWER_RANGE);
+    power = calculator.getMode(matrix, POWER_RANGE);
     $('#result').text(power);
   });
 
@@ -78,7 +68,7 @@ $(function() {
   PowerCalculator.prototype.getDamages = function() {
     var damages;
     damages = $.unique($('.damage').map(function(i, e) {
-      if ($(this)) {
+      if ($(this).val()) {
         return $(this).val() - 0;
       }
     }).get());
@@ -107,7 +97,7 @@ $(function() {
       count = 0;
       for (var j = 0; j < DAMAGE_RANDOM_NUMBERS.length; j++) {
         for (var k = 0; k < DAMAGE_RANDOM_NUMBERS.length; k++) {
-          array[count] = (damages[i] / correctionC - (attack - deffence) * skillAmplification * physicalDamageUpRate * physicalElement * DAMAGE_RANDOM_NUMBERS[j]) / (basicDamage / constant) / DAMAGE_RANDOM_NUMBERS[k] / damageUpRate / element;
+          array[count] = Math.round((damages[i] / correctionC - (attack - deffence) * skillAmplification * physicalDamageUpRate * physicalElement * DAMAGE_RANDOM_NUMBERS[j]) / (basicDamage / constant) / DAMAGE_RANDOM_NUMBERS[k] / damageUpRate / element);
           count++;
         }
       }
@@ -133,7 +123,7 @@ $(function() {
       array = [];
       count = 0;
       for (var j = 0; j < DAMAGE_RANDOM_NUMBERS.length; j++) {
-        array[j] = (damages[i] / correctionC) / (basicDamage / constant) / DAMAGE_RANDOM_NUMBERS[j] / damageUpRate / element;
+        array[j] = Math.round((damages[i] / correctionC) / (basicDamage / constant) / DAMAGE_RANDOM_NUMBERS[j] / damageUpRate / element);
       }
       matrix[i] = $.unique(array);
     }
@@ -157,10 +147,11 @@ $(function() {
             }
           }
         }
-        console.log('(count, matrix[i].length) =(' + count + ', ' + matrix[i].length + ')');
+        // console.log('(count, matrix[i].length) =(' + count + ', ' + matrix[i].length + ')');
         if (count >= countMax) {
           mode = matrix[i][j];
-          console.log('(countMax, matrix[' + i + '][' + j + ']) = (' + countMax + ' ,(' + matrix[i][j] + ')');
+          countMax = count;
+          // console.log('(countMax, matrix[' + i + '][' + j + ']) = (' + countMax + ' ,' + matrix[i][j] + ')');
         }
       }
     }
@@ -186,8 +177,9 @@ $(function() {
   Status.prototype.correctElement = function() {
     var element = this.element;
     element += 1 / 2;
+    element /= 100;
     if (this.elementType === 1) { // 1: 弱点 0: 普通 -1: 抵抗
-      if (element > 1) {
+      if (element > 2) {
         return 2;
       } else {
         element += 1;
