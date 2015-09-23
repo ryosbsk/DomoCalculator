@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>飛天オンライン天賦威力計算機</title>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+    <div class="navbar-header">
+      <a href="#" class="navbar-brand">飛天オンラインダメージ計算機 ver.0.5</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <form class="form-horizontal">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="raw">
+            <fieldset>
+              <legend>物理ステータス</legend>
+              <div class="form-group">
+                <label class="control-label col-md-6" for="physical-attack">物理攻撃力</label>
+                <div class="col-md-6">
+                  <input class="form-control" type="number" id="physical-attack">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-6" for="enemy-physical-deffence">敵: 物理防御力</label>
+                <div class="col-md-6">
+                  <input class="form-control" type="number" id="enemy-physical-deffence">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-6" for="physical-element">属性値</label>
+                <div class="col-md-6">
+                  <input class="form-control" type="number" id="physical-element">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-6" for="physical-element-type">属性タイプ</label>
+                <div class="col-md-6">
+                  <select class="form-control" id="physical-element-type">
+                    <option value="1">弱点</option>
+                    <option value="-1">抵抗</option>
+                    <option value="0">どちらでもない</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-6" for="physical-damage-increase-rate">物理ダメージ増加率(%)</label>
+                <div class="col-md-6">
+                  <input class="form-control" type="number" id="physical-damage-increase-rate">
+                </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>法術ステータス</legend>
+              <div class="form-group">
+                <label class="control-label col-md-6" for="magic-attack">法術攻撃力</label>
+                <div class="col-md-6">
+                  <input class="form-control" type="number" id="magic-attack">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-6" for="enemy-magic-deffence">敵: 法術防御力</label>
+                <div class="col-md-6">
+                  <input class="form-control" type="number" id="enemy-magic-deffence">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-6" for="magic-element-type">法術属性タイプ</label>
+                <div class="col-md-6">
+                  <select class="form-control" id="magic-element-type">
+                    <option value="1">弱点</option>
+                    <option value="-1">抵抗</option>
+                    <option value="0">どちらでもない</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-6" for="magic-damage-increase-rate">法術ダメージ増加率(%)</label>
+                <div class="col-md-6">
+                  <input class="form-control" type="number" id="magic-damage-increase-rate">
+                </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>天賦</legend>
+              <div class="form-group">
+                <label class="control-label col-md-6" for="skill-amplification-rate">増幅率(%)</label>
+                <div class="col-md-6">
+                  <input class="form-control" type="number" id="skill-amplification-rate" step="10">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-6" for="skill-power-type">分類</label>
+                <div class="col-md-6">
+                  <select class="form-control" id="skill-power-type">
+                    <option value="1">物理</option>
+                    <option value="0">法術</option>
+                  </select>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>補正</legend>
+              <div class="form-group">
+                <label class="control-label col-md-6" for="job-increase-rate">職業増加率(%)</label>
+                <div class="col-md-6">
+                  <input class="form-control" type="number" id="job-increase-rate">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-6" for="enemy-level-gap">敵レベル差補正</label>
+                <div class="col-md-6">
+                  <select class="form-control" id="enemy-level-gap">
+                    <option value="1.6">+60%</option>
+                    <option value="1.45">+45%</option>
+                    <option value="1.3">+30%</option>
+                    <option value="1.15">+15%</option>
+                    <option value="1" selected>0%</option>
+                    <option value=".85">-15%</option>
+                    <option value=".7">-30%</option>
+                    <option value=".55">-45%</option>
+                    <option value=".4">-60%</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-6" for="skill-level-gap">習得レベル差補正</label>
+                <div class="col-md-6">
+                  <select class="form-control" id="skill-level-gap">
+                    <option value="1">0%</option>
+                    <option value=".95">-5%</option>
+                    <option value=".90">-10%</option>
+                    <option value=".85">-15%</option>
+                    <option value=".80">-20%</option>
+                    <option value=".75">-25%</option>
+                    <option value=".70">-30%</option>
+                    <option value=".65">-35%</option>
+                    <option value=".60">-40%</option>
+                    <option value=".55">-45%</option>
+                    <option value=".50">-50%</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-md-6" for="job-type-gap">職業差補正</label>
+                <div class="col-md-6">
+                  <select class="form-control" id="job-type-gap">
+                    <option value="1">0%</option>
+                    <option value=".9">-10%</option>
+                    <option value=".8">-20%</option>
+                  </select>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="raw">
+            <fieldset>
+              <legend>ダメージ</legend>
+              <div class="col-sm-6">
+                <div class="raw">
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage1">#1</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage1">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage2">#2</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage2">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage3">#3</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage3">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage4">#4</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage4">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage5">#5</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage5">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage6">#6</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage6">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage7">#7</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage7">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage8">#8</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage8">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage9">#9</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage9">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage10">#10</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage10">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="raw">
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage11">#11</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage11">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage12">#12</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage12">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage13">#13</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage13">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage14">#14</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage14">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage15">#15</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage15">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage16">#16</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage16">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage17">#17</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage17">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage18">#18</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage18">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage19">#19</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage19">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3" for="damage20">#20</label>
+                    <div class="col-md-9">
+                      <input type="number" class="form-control damage" id="damage20">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+          <div class="raw">
+            <div class="col-md-12">
+              <div class="form-group">
+                <div class="col-md-12">
+                  <button type="button" class="form-control btn-info" id="btn-calculator">計算</button>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">威力</h3>
+                </div>
+                <div class="panel-body">
+                  <p class="text-right">
+                    <strong id="result">0</strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script src="js/jquery-1.11.3.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/powercalculater.js"></script>
+</body>
+
+</html>
