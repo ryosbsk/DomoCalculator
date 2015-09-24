@@ -1,6 +1,4 @@
 $(function() {
-
-
   // 計算
   $('#btn-calculator').click(function() {
     var PHYSICAL_CONSTANT = 7.5,
@@ -54,7 +52,7 @@ $(function() {
     }
 
     power = calculator.getMode(matrix, POWER_RANGE);
-    $('#result').text(power);
+    $('#result').val(power);
   });
 
   function PowerCalculator(isSkillType, skillAmplification, enemyJobDamageUpRate, enemyLevelCorrection, skillLevelCorrection, jobTypeCorrection) {

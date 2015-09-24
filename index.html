@@ -5,201 +5,207 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>飛天オンラインダメージ計算機</title>
+  <title>飛天オンライン計算機 - ダメージ計算機</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
   <nav class="navbar navbar-default">
-    <div class="navbar-header">
-      <a href="#" class=navbar-brand>飛天オンラインダメージ計算機 ver.0.5
-</a>
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">飛天オンライン計算機</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="/">ダメージ計算機</a></li>
+          <li><a href="powercalculator.html">威力計算機</a></li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
     </div>
+    <!-- /.container-fluid -->
   </nav>
+
+  <div class="page-header">
+    <h1>ダメージ計算機
+      <small>ver.0.5.1</small>
+    </h1>
+  </div>
 
   <div class="container">
     <form class="form-horizontal">
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="raw">
-            <fieldset>
-              <legend>自ステータス</legend>
-              <div class="form-group">
-                <label class="control-label col-md-6" for="attack">物理攻撃力</label>
-                <div class="col-md-6">
-                  <input class="form-control" type="number" id="attack">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-md-6" for="mAttack">法術攻撃力</label>
-                <div class="col-md-6">
-                  <input class="form-control" type="number" id="mAttack">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-md-6" for="increase">物理ダメージ増加率(%)</label>
-                <div class="col-md-6">
-                  <input class="form-control" type="number" id="increase">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-md-6" for="mIncrease">法術ダメージ増加率(%)</label>
-                <div class="col-md-6">
-                  <input class="form-control" type="number" id="mIncrease">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-md-6" for="element">属性値</label>
-                <div class="col-md-6">
-                  <input class="form-control" type="number" id="element">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-md-6" for="elementType">属性タイプ</label>
-                <div class="col-md-6">
-                  <select class="form-control" id="elementType">
-                    <option value="isWeekness">弱点</option>
-                    <option value="isResistance">抵抗</option>
-                    <option value="isNormal">どちらでもない</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-md-6" for="jobIncrease">職業増加率(%)</label>
-                <div class="col-md-6">
-                  <input class="form-control" type="number" id="jobIncrease">
-                </div>
-              </div>
-            </fieldset>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="raw">
-            <fieldset>
-              <legend>天賦</legend>
-              <div class="form-group">
-                <label class="control-label col-md-6" for="power">威力</label>
-                <div class="col-md-6">
-                  <input class="form-control" type="number" id="power">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-md-6" for="amplification">増幅率(%)</label>
-                <div class="col-md-6">
-                  <input class="form-control" type="number" id="amplification" step="10">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-md-6" for="powerType">分類</label>
-                <div class="col-md-6">
-                  <select class="form-control" id="powerType">
-                    <option value="isPhysics">物理</option>
-                    <option value="isMasic">法術</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-md-6" for="mElement">法術属性値</label>
-                <div class="col-md-6">
-                  <input class="form-control" type="nuber" value="50" disabled>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-md-6" for="mElementType">法術属性タイプ</label>
-                <div class="col-md-6">
-                  <select class="form-control" id="mElementType" disabled>
-                    <option value="isWeekness">弱点</option>
-                    <option value="isResistance">抵抗</option>
-                    <option value="isNomal">どちらでもない</option>
-                  </select>
-                </div>
-              </div>
-            </fieldset>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="raw">
-            <fieldset>
-              <legend>敵ステータス</legend>
-              <div class="form-group">
-                <label class="control-label col-md-6" for="deffence">物理防御力</label>
-                <div class="col-md-6">
-                  <input class="form-control" type="number" id="deffence">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-md-6" for="mDeffence">法術防御力</label>
-                <div class="col-md-6">
-                  <input class="form-control" type="number" id="mDeffence">
-                </div>
-              </div>
-            </fieldset>
-            <fieldset>
-              <legend>補正</legend>
-              <div class="form-group">
-                <label class="control-label col-md-6" for="enemyLevelGap">敵レベル差補正</label>
-                <div class="col-md-6">
-                  <select class="form-control" id="enemyLevelGap">
-                    <option value="0.6">+60%</option>
-                    <option value="0.45">+45%</option>
-                    <option value="0.3">+30%</option>
-                    <option value="0.15">+15%</option>
-                    <option value="0" selected>0%</option>
-                    <option value="-0.15">-15%</option>
-                    <option value="-0.3">-30%</option>
-                    <option value="-0.45">-45%</option>
-                    <option value="-0.6">-60%</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-md-6" for="skillLevelGap">習得レベル差補正</label>
-                <div class="col-md-6">
-                  <select class="form-control" id="skillLevelGap">
-                    <option value="0">0%</option>
-                    <option value="-0.05">-5%</option>
-                    <option value="-0.1">-10%</option>
-                    <option value="-0.15">-15%</option>
-                    <option value="-0.2">-20%</option>
-                    <option value="-0.25">-25%</option>
-                    <option value="-0.3">-30%</option>
-                    <option value="-0.35">-35%</option>
-                    <option value="-0.4">-40%</option>
-                    <option value="-0.45">-45%</option>
-                    <option value="-0.5">-50%</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-md-6" for="jobGap">職業差補正</label>
-                <div class="col-md-6">
-                  <select class="form-control" id="jobGap">
-                    <option value="0">0%</option>
-                    <option value="-0.1">-10%</option>
-                    <option value="-0.2">-20%</option>
-                  </select>
-                </div>
-              </div>
-            </fieldset>
-          </div>
-        </div>
-      </div>
-      <div class="raw">
-        <div class="col-sm-12">
+      <div class="col-sm-4">
+        <fieldset>
+          <legend>自ステータス</legend>
           <div class="form-group">
-            <button type="button" class="btn form-control btn-info" id="calculate">計算</button>
+            <label class="control-label col-md-6" for="attack">物理攻撃力</label>
+            <div class="col-md-6">
+              <input class="form-control" type="number" id="attack">
+            </div>
           </div>
-
+          <div class="form-group">
+            <label class="control-label col-md-6" for="mAttack">法術攻撃力</label>
+            <div class="col-md-6">
+              <input class="form-control" type="number" id="mAttack">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-6" for="increase">物理ダメージ増加率(%)</label>
+            <div class="col-md-6">
+              <input class="form-control" type="number" id="increase">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-6" for="mIncrease">法術ダメージ増加率(%)</label>
+            <div class="col-md-6">
+              <input class="form-control" type="number" id="mIncrease">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-6" for="element">属性値</label>
+            <div class="col-md-6">
+              <input class="form-control" type="number" id="element">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-6" for="elementType">属性タイプ</label>
+            <div class="col-md-6">
+              <select class="form-control" id="elementType">
+                <option value="isWeekness">弱点</option>
+                <option value="isResistance">抵抗</option>
+                <option value="isNormal">どちらでもない</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-6" for="jobIncrease">職業増加率(%)</label>
+            <div class="col-md-6">
+              <input class="form-control" type="number" id="jobIncrease">
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-sm-4">
+        <fieldset>
+          <legend>天賦</legend>
+          <div class="form-group">
+            <label class="control-label col-md-6" for="power">威力</label>
+            <div class="col-md-6">
+              <input class="form-control" type="number" id="power">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-6" for="amplification">増幅率(%)</label>
+            <div class="col-md-6">
+              <input class="form-control" type="number" id="amplification" step="10">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-6" for="powerType">分類</label>
+            <div class="col-md-6">
+              <select class="form-control" id="powerType">
+                <option value="isPhysics">物理</option>
+                <option value="isMasic">法術</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-6" for="mElement">法術属性値</label>
+            <div class="col-md-6">
+              <input class="form-control" type="number" value="50" disabled id="mElement">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-6" for="mElementType">法術属性タイプ</label>
+            <div class="col-md-6">
+              <select class="form-control" id="mElementType" disabled>
+                <option value="isWeekness">弱点</option>
+                <option value="isResistance">抵抗</option>
+                <option value="isNomal">どちらでもない</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-sm-4">
+        <fieldset>
+          <legend>敵ステータス</legend>
+          <div class="form-group">
+            <label class="control-label col-md-6" for="deffence">物理防御力</label>
+            <div class="col-md-6">
+              <input class="form-control" type="number" id="deffence">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-6" for="mDeffence">法術防御力</label>
+            <div class="col-md-6">
+              <input class="form-control" type="number" id="mDeffence">
+            </div>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>補正</legend>
+          <div class="form-group">
+            <label class="control-label col-md-6" for="enemyLevelGap">敵レベル差補正</label>
+            <div class="col-md-6">
+              <select class="form-control" id="enemyLevelGap">
+                <option value="0.6">+60%</option>
+                <option value="0.45">+45%</option>
+                <option value="0.3">+30%</option>
+                <option value="0.15">+15%</option>
+                <option value="0" selected>0%</option>
+                <option value="-0.15">-15%</option>
+                <option value="-0.3">-30%</option>
+                <option value="-0.45">-45%</option>
+                <option value="-0.6">-60%</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-6" for="skillLevelGap">習得レベル差補正</label>
+            <div class="col-md-6">
+              <select class="form-control" id="skillLevelGap">
+                <option value="0">0%</option>
+                <option value="-0.05">-5%</option>
+                <option value="-0.1">-10%</option>
+                <option value="-0.15">-15%</option>
+                <option value="-0.2">-20%</option>
+                <option value="-0.25">-25%</option>
+                <option value="-0.3">-30%</option>
+                <option value="-0.35">-35%</option>
+                <option value="-0.4">-40%</option>
+                <option value="-0.45">-45%</option>
+                <option value="-0.5">-50%</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-md-6" for="jobGap">職業差補正</label>
+            <div class="col-md-6">
+              <select class="form-control" id="jobGap">
+                <option value="0">0%</option>
+                <option value="-0.1">-10%</option>
+                <option value="-0.2">-20%</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+        <div class="input-group">
+          <input type="text" class="form-control text-right" placeholder="ダメージ" id="damage">
+          <span class="input-group-btn">
+            <button class="btn btn-info" type="button" id="calculate">計算</button>
+          </span>
         </div>
       </div>
     </form>
-  </div>
-  <div class="container">
-    <div class="jumbotron">
-      <p style="text-align: center;">
-         ダメージ: <span id="damage">----</span>
-      </p>
-    </div>
   </div>
   <hr>
   <div class="container">
@@ -238,11 +244,11 @@
       <a href="//twitter.com/ryosbsk">@ryosbsk</a>
     </p>
   </div>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script>
     $(function() {
-      $('#powerType').change(function() {
+      $("#powerType").change(function() {
         if ($(this).val() == "isMasic") {
           $("#mElementType").prop("disabled", false);
         } else {
@@ -253,25 +259,25 @@
       $("#calculate").click(function() {
         // 変数の定義
         // 物理
-        var attack = $('#attack').val() - 0;
-        var deffence = $('#deffence').val() - 0;
-        var increase = $('#increase').val() - 0;
+        var attack = $("#attack").val() - 0;
+        var deffence = $("#deffence").val() - 0;
+        var increase = $("#increase").val() - 0;
         var element = $("#element").val() - 0;
         var elementType = $("#elementType").val(); // isWeekness, isResistance, isNormal
         // 法術
-        var mAttack = $('#mAttack').val() - 0;
-        var mDeffence = $('#mDeffence').val() - 0;
-        var mIncrease = $('#mIncrease').val() - 0;
+        var mAttack = $("#mAttack").val() - 0;
+        var mDeffence = $("#mDeffence").val() - 0;
+        var mIncrease = $("#mIncrease").val() - 0;
         var mElement = $("#mElement").val() - 0;
         var mElementType = $("#mElementType").val(); // isWeekness, isResistance, isNormal
         // 天賦
-        var power = $('#power').val() - 0;
-        var amplification = $('#amplification').val() - 0;
+        var power = $("#power").val() - 0;
+        var amplification = $("#amplification").val() - 0;
         // その他
-        var jobIncrease = $('#jobIncrease').val() - 0;
-        var enemyLevelGap = $('#enemyLevelGap').val() - 0;
-        var skillLevelGap = $('#skillLevelGap').val() - 0;
-        var jobGap = $('#jobGap').val() - 0;
+        var jobIncrease = $("#jobIncrease").val() - 0;
+        var enemyLevelGap = $("#enemyLevelGap").val() - 0;
+        var skillLevelGap = $("#skillLevelGap").val() - 0;
+        var jobGap = $("#jobGap").val() - 0;
 
         // 補正計算
         increase = 1 + increase / 100;
@@ -329,12 +335,36 @@
         var correctionB = amplification * increase * element;
         var correctionC = jobIncrease * enemyLevelGap * skillLevelGap * jobGap;
 
+        var termA_;
+        var termB_;
+        termA_ = basicDamage * correctionA;
+        termB_ = (attack - deffence) + correctionB;
+
+
         var damage;
+
         damage = (basicDamage * correctionA + (attack - deffence) * correctionB) * correctionC;
         damage = Math.round(damage);
 
         $("#damage").text(damage);
+        debugDamage(termA_, termB_, correctionC);
+
+        function debugDamage(termA_, termB_, correctionC) {
+          var array_, i, j;
+
+          array_ = [.95, .96, .97, .98, .99, 1, 1.01, 1.02, 1.03, 1.04, 1.05];
+          i = Math.floor(Math.random() * 11);
+          j = Math.floor(Math.random() * 11);
+          termA_ = termA_ * array_[i];
+          termB_ = termB_ * array_[j];
+          var damage_;
+          damage_ = termA_ + termB_
+          damage_ = damage_ * correctionC;
+          console.log(damage_);
+        }
       });
+
+
 
     });
   </script>
