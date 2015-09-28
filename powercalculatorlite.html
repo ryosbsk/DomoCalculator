@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>飛天オンライン計算機 - 天賦威力計算機</title>
+  <title>飛天オンライン計算機 - 天賦威力計算機 Lite</title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -25,8 +25,8 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <li><a href="./">ダメージ計算機</a></li>
-          <li class="active"><a href="powercalculator.html">威力計算機</a></li>
-          <li><a href="powercalculatorlite.html">威力計算機 Lite</a></li>
+          <li><a href="powercalculator.html">威力計算機</a></li>
+          <li class="active"><a href="powercalculatorlite.html">威力計算機 Lite</a></li>
         </ul>
       </div>
       <!-- /.navbar-collapse -->
@@ -35,7 +35,7 @@
   </nav>
 
   <div class="page-header">
-    <h1>威力計算機
+    <h1>威力計算機 Lite
       <small>ver.0.1.0</small>
     </h1>
   </div>
@@ -118,7 +118,7 @@
           <div class="form-group">
             <label class="control-label col-md-6" for="skill-amplification-rate">増幅率(%)</label>
             <div class="col-md-6">
-              <input class="form-control" type="number" id="skill-amplification-rate" step="10">
+              <input class="form-control" type="number" id="skill-amplification-rate" step="10" disabled value="0">
             </div>
           </div>
           <div class="form-group">
@@ -322,10 +322,41 @@
       </div>
     </form>
   </div>
+  <hr>
+  <div class="container">
+    <h2>これは何?</h2>
+    <p>
+      MMORPG飛天オンラインの、天賦の威力計算機(Liteバージョン)です。
+    </p>
+    <h2>使い方</h2>
+    <ol>
+      <li>各フォームに数値を入力してください。</li>
+      <li>計算ボタンをクリック･タップしてください。</li>
+      <li>※ 増幅率のある天賦は計算できません。</li>
+    </ol>
+    <h2>計算について</h2>
+    <ol>
+      <li>入力されたデータから最大値と最小値を求めます。</li>
+      <li>それぞれを1.05と0.95で除算します。</li>
+      <li>それぞれの商の差を求めます。</li>
+      <ul>
+        <li>差が1以内ならば、データの最大値をダメージの中央値とします。</li>
+        <li>差が1より大きいときは、計算を中止します。</li>
+      </ul>
+      <li>ダメージの中央値から天府の威力を逆算します。</li>
+    </ol>
+    <p>
+      逆算するのに用いた式は、<a href="//domo-jp.e-whs.net/dmg.html">飛天オンライン・データベース</a>を参考にしました。
+    </p>
+    <h2>製作者</h2>
+    <p>
+      <a href="//twitter.com/ryosbsk">@ryosbsk</a>
+    </p>
+  </div>
 
   <script src="js/jquery-1.11.3.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src="js/powercalculator.js"></script>
+  <script src="js/powercalculatorlite.js"></script>
   <script src="js/debug.js"></script>
 </body>
 
