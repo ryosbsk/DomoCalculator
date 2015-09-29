@@ -1,4 +1,10 @@
 $(function() {
+  // ダメージ欄クリア
+  $('#btn-clear-damage').click(function() {
+    $('.damage').each(function(index, el) {
+      $(this).val('');
+    });
+  });
   // 計算
   $('#btn-calculator').click(function() {
     var PHYSICAL_CONSTANT = 7.5,
@@ -63,15 +69,20 @@ $(function() {
   }
 
   PowerCalculator.prototype.checkUniqueDamages = function() {
-    var damages, uniqueDamages;
-    damages = this.getDamages();
-    uniqueDamages = $.unique(damages);
-
-    if (damages.length === uniqueDamages.length) {
-      return false;
-    } else {
-      return true;
+    var array;
+    array = [];
+    array = this.getDamages();
+    for (var i = 0; i < array.length; i++) {
+      for (var j = 0; j < array.length; j++) {
+        if (i===j) {
+          j++;
+        }
+        if (array[i]===array[j]) {
+          return false;
+        }
+      }
     }
+    return true;
   };
 
   PowerCalculator.prototype.getDamages = function() {

@@ -1,4 +1,10 @@
 $(function() {
+  // ダメージ欄クリア
+  $('#btn-clear-damage').click(function() {
+    $('.damage').each(function(index, el) {
+      $(this).val('');
+    });
+  });
   // 計算
   $('#btn-calculator').click(function() {
     var PHYSICAL_CONSTANT = 7.5,
@@ -41,7 +47,7 @@ $(function() {
       alert('入力されたダメージに重複があります。');
       return;
     }
-    
+
     if (calculator.isSkillType) { // 1: 物理 0: 法術
       if (calculator.skillAmplification) {
         matrix = calculator.getPowerMatrixWithAmplification(Physical, Physical);
@@ -69,26 +75,34 @@ $(function() {
   }
 
   PowerCalculator.prototype.checkUniqueDamages = function() {
-    var damages, uniqueDamages;
-    damages = this.getDamages();
-    uniqueDamages = $.unique(damages);
-
-    if (damages.length === uniqueDamages.length) {
-      return false;
-    } else {
-      return true;
+    var array;
+    array = [];
+    array = this.getDamages();
+    for (var i = 0; i < array.length; i++) {
+      for (var j = 0; j < array.length; j++) {
+        if (i===j) {
+          j++;
+        }
+        if (array[i]===array[j]) {
+          return false;
+        }
+      }
     }
+    return true;
   };
 
   PowerCalculator.prototype.getDamages = function() {
     var damages;
-    damages = $.unique($('.damage').map(function(i, e) {
+
+    damages = $('.damage').map(function(i, e) {
       if ($(this).val()) {
         return $(this).val() - 0;
       }
-    }).get());
+    }).get();
+
     return damages;
   };
+
 
   PowerCalculator.prototype.getPowerMatrixWithAmplification = function(status, Physical) {
     var damages, array, count, matrix, correctionC, attack, deffence, skillAmplification, damageUpRate, element, basicDamage, physicalAttack, physicalDeffence, physicalDamageUpRate, physicalElement;
