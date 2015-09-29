@@ -37,6 +37,11 @@ $(function() {
       MAGIC_CONSTANT
     );
 
+    if (!calculator.checkUniqueDamages()) {
+      alert('入力されたダメージに重複があります。');
+      return;
+    }
+    
     if (calculator.isSkillType) { // 1: 物理 0: 法術
       if (calculator.skillAmplification) {
         matrix = calculator.getPowerMatrixWithAmplification(Physical, Physical);
@@ -62,6 +67,18 @@ $(function() {
     this.DAMAGE_RANDOM_NUMBERS = [0.95, 0.96, 0.97, 0.98, 0.99, 1, 1.01, 1.02, 1.03, 1.04, 1.05];
 
   }
+
+  PowerCalculator.prototype.checkUniqueDamages = function() {
+    var damages, uniqueDamages;
+    damages = this.getDamages();
+    uniqueDamages = $.unique(damages);
+
+    if (damages.length === uniqueDamages.length) {
+      return false;
+    } else {
+      return true;
+    }
+  };
 
   PowerCalculator.prototype.getDamages = function() {
     var damages;

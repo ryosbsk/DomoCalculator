@@ -36,15 +36,21 @@ $(function() {
       $('#magic-element-type').val() - 0,
       MAGIC_CONSTANT
     );
-    if (status.isSkillType) {
+
+    if (!calculator.checkUniqueDamages()) {
+      alert('入力されたダメージに重複があります。');
+      return;
+    }
+
+    if (calculator.isSkillType) {
       power = calculator.getPowerLite(Physical);
-    }else {
+    } else {
       power = calculator.getPowerLite(Magic);
     }
 
     if (power) {
       $('#result').val(power);
-    }else {
+    } else {
       alert('最大値と最小値を計算できませんでした。\nデータが不足しています。');
     }
   });
@@ -54,16 +60,29 @@ $(function() {
     this.skillAmplification = skillAmplification;
     this.correctionC = enemyJobDamageUpRate * enemyLevelCorrection * skillLevelCorrection * jobTypeCorrection;
     this.DAMAGE_RANDOM_NUMBERS = [0.95, 0.96, 0.97, 0.98, 0.99, 1, 1.01, 1.02, 1.03, 1.04, 1.05];
-
   }
+
+  PowerCalculator.prototype.checkUniqueDamages = function() {
+    var damages, uniqueDamages;
+    damages = this.getDamages();
+    uniqueDamages = $.unique(damages);
+
+    if (damages.length === uniqueDamages.length) {
+      return false;
+    } else {
+      return true;
+    }
+  };
 
   PowerCalculator.prototype.getDamages = function() {
     var damages;
-    damages = $.unique($('.damage').map(function(i, e) {
+
+    damages = $('.damage').map(function(i, e) {
       if ($(this).val()) {
         return $(this).val() - 0;
       }
-    }).get());
+    }).get();
+
     return damages;
   };
 
