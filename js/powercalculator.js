@@ -28,7 +28,7 @@ $(function() {
     Physical = new Status( // attack, deffence, damageUpRate, element, elementType, constant
       $('#physical-attack').val() - 0,
       $('#enemy-physical-deffence').val() - 0,
-      $('#physical-damage-increase-rate').val() - 0 + 1,
+      $('#physical-damage-increase-rate').val() / 100 + 1,
       $('#physical-element').val() - 0,
       $('#physical-element-type').val() - 0,
       PHYSICAL_CONSTANT
@@ -37,7 +37,7 @@ $(function() {
     Magic = new Status( // attack, deffence, damageUpRate, element, elementType, constant
       $('#magic-attack').val() - 0,
       $('#enemy-magic-deffence').val() - 0,
-      $('#magic-damage-increase-rate').val() - 0 + 1,
+      $('#magic-damage-increase-rate').val() / 100 + 1,
       MAGIC_ELEMENT,
       $('#magic-element-type').val() - 0,
       MAGIC_CONSTANT
@@ -80,10 +80,10 @@ $(function() {
     array = this.getDamages();
     for (var i = 0; i < array.length; i++) {
       for (var j = 0; j < array.length; j++) {
-        if (i===j) {
+        if (i === j) {
           j++;
         }
-        if (array[i]===array[j]) {
+        if (array[i] === array[j]) {
           return false;
         }
       }

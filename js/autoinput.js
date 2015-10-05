@@ -1,12 +1,14 @@
 $(function() {
-  var PATH = './csv/enemy.csv';
+  var PATH = './csv/enemy.csv',
+    ENEMY_LIST = '#enemy-list';
   $.get(PATH, function(csv) {
     var matrix, enemy;
     matrix = [];
     enemy = {};
     matrix = convertCsvToArray(csv);
     enemy = getEnemyObject(matrix);
-    console.log(enemy.enemyId200);
+
+
   });
 
   function convertCsvToArray(csv) {
@@ -33,6 +35,11 @@ $(function() {
       }
     }
     return enemy;
+  }
+
+  function hoge(enemy) {
+    var li = '<li>';
+    $(ENEMY_LIST).append();
   }
 
 });

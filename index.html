@@ -36,9 +36,7 @@
   </nav>
 
   <div class="page-header">
-    <h1>ダメージ計算機
-      <small>ver.0.5.1</small>
-    </h1>
+    <h1>ダメージ計算機</h1>
   </div>
 
   <div class="container">
@@ -347,7 +345,7 @@
         damage = (basicDamage * correctionA + (attack - deffence) * correctionB) * correctionC;
         damage = Math.round(damage);
 
-        $("#damage").text(damage);
+        $("#damage").val(damage);
         debugDamage(termA_, termB_, correctionC);
 
         function debugDamage(termA_, termB_, correctionC) {
